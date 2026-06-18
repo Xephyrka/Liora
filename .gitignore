@@ -1,0 +1,54 @@
+# Built objects
+build/
+bin/
+gen/
+out/
+/app/build
+
+# Artifacts
+*.apk
+*.aar
+*.ap_
+*.aab
+*.dex
+
+# Gradle
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+
+# Local configuration
+local.properties
+*.properties
+!gradle.properties
+
+# Log files
+*.log
+
+# Android Studio / IntelliJ
+.idea/
+!.idea/codeStyles/
+!.idea/copyright/
+!.idea/inspectionProfiles/
+*.iml
+*.iws
+*.ipr
+
+# Mac / Windows system files
+.DS_Store
+Thumbs.db
+
+# Secrets
+*.jks
+*.keystore
+google-services.json
+
+# Navigation editor
+.idea/navEditor.xml
+.navigation/
+
+# Captures and Native
+/captures/
+.externalNativeBuild/
+.cxx/
+cmake-build-*/

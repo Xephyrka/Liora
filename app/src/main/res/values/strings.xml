@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Liora</string>
+    <string name="accessibility_description">Liora uses this service to block distracting apps during your focus hours (6 AM - 12 PM).</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Your preferred Indigo Blue palette -->
+    <color name="primary">#3E6F94</color>
+    <color name="primary_variant">#4C5A78</color>
+    <color name="secondary">#8FBCE6</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
