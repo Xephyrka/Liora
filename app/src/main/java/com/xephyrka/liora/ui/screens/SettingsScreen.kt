@@ -457,7 +457,7 @@ private fun SettingsContent(
                     CupertinoGroupedSection {
                         SettingsNavigationItem(
                             title = "Version",
-                            subtitle = "1.0.1",
+                            subtitle = "1.0.2",
                             icon = Icons.Default.Info,
                             onClick = {
                                 if (!developerMode) {
