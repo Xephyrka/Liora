@@ -95,7 +95,7 @@ fun TaskItem(
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
                             text = task.title,
-                            style = if (task.itemType == ItemType.NOTE) MaterialTheme.typography.titleLarge else MaterialTheme.typography.titleMedium,
+                            style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold
                         )
                         if (task.itemType != ItemType.NOTE && task.reminderTime != null) {

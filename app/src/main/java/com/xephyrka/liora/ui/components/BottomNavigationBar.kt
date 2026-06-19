@@ -47,11 +47,14 @@ fun BottomNavigationBar(
         color = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f),
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp),
+            .windowInsetsPadding(WindowInsets.navigationBars),
         tonalElevation = 0.dp
     ) {
         Row(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 48.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(80.dp)
+                .padding(horizontal = 48.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             items.forEachIndexed { index, item ->

@@ -84,7 +84,7 @@ fun MainScreen(
             ShowcaseStep(
                 id = "focus_mode", 
                 title = "Focus Mode", 
-                description = "Block distracting apps and do with your tasks distraction-free",
+                description = "Block distracting apps and do your tasks",
                 isFullScreen = true
             ),
             ShowcaseStep("home", "Your Dashboard", "Manage all your tasks and lists from one central place"),

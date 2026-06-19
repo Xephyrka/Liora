@@ -6,12 +6,15 @@
 Liora is a task management application specifically designed for me by me  : )
 
 ## Features
-- **Quick Capture** - Instantly add notes or tasks via a quick action or the “+” button
+- **Quick Add** - Instantly add notes or tasks via constant notification of the Liora app. You can also add a reminder time for the task by adding a semicolon with space in the end of the task title. **Example**:
+  - Add a task ->
+    - "Don't forget to do the dishes after eating; 8am"
+    - "Read a book, damn; 8:30 pm"
+    - "Take your kid home from school; 16:00"
 - **Notes** - Save thoughts that aren’t tasks but shouldn’t be forgotten
-- **Task Breakdown** - Split complex tasks into smaller actionable steps
-- **Daily Momentum** - Recurring tasks automatically reset each day
-- **Focus Protection** - Full-screen reminders and blocker mode to reduce distraction
-- **Cognitive Load System** - Tasks are organized by effort level to reduce overwhelm
+- **Tasks** - Write down what needs to be done, add a reminder time. If the task is complex - break it down into subtasks
+- **Repetition** - You can make tasks repeat and be reminded every n day/weeks/months
+- **Focus** - Full-screen reminders and blocker mode to reduce distraction
 - **Privacy First** - All data is stored locally using Room database
 
 

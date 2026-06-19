@@ -2,6 +2,7 @@ package com.xephyrka.liora.data.local
 
 import android.content.Context
 import androidx.room.*
+import com.xephyrka.liora.data.local.Converters
 import com.xephyrka.liora.data.model.SubTask
 import com.xephyrka.liora.data.model.Task
 import com.xephyrka.liora.data.model.TaskList
@@ -12,9 +13,16 @@ import com.xephyrka.liora.data.model.TaskList
  */
 @Database(
     entities = [Task::class, TaskList::class, SubTask::class],
-    version = 1,
-    exportSchema = false,
+    version = 32,
+    autoMigrations = [
+        AutoMigration(from = 2, to = 3),
+        AutoMigration(from = 3, to = 30),
+        AutoMigration(from = 30, to = 31),
+        AutoMigration(from = 31, to = 32)
+    ],
+    exportSchema = true,
 )
+@TypeConverters(Converters::class)
 abstract class TaskDatabase : RoomDatabase() {
     /** Provides access to the Data Access Object (DAO) for database operations. */
     abstract fun taskDao(): TaskDao
@@ -34,7 +42,10 @@ abstract class TaskDatabase : RoomDatabase() {
                     context.applicationContext,
                     TaskDatabase::class.java,
                     "liora_database"
-                ).fallbackToDestructiveMigration(dropAllTables = true).build()
+                )
+                    // Safe mode: Only allow destructive migration on downgrades to protect user data.
+                    .fallbackToDestructiveMigrationOnDowngrade(dropAllTables = true)
+                    .build()
                 INSTANCE = instance
                 instance
             }

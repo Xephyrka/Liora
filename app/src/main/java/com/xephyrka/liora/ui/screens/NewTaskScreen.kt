@@ -66,8 +66,8 @@ fun NewTaskScreen(
         existingTask = existingTask,
         taskLists = taskLists,
         allSubTasks = allSubTasks,
-        onAddTask = { title, content, lId, type, reminder, subs, isRec, recInt, recUnit, recDays, recEndD, recEndO ->
-            viewModel.addTask(title, content, lId, type, reminder, subs, isRec, recInt, recUnit, recDays, recEndD, recEndO)
+        onAddTask = { title, content, lId, type, reminder, priority, subs, isRec, recInt, recUnit, recDays, recEndD, recEndO ->
+            viewModel.addTask(title, content, lId, type, reminder, priority, subs, isRec, recInt, recUnit, recDays, recEndD, recEndO)
         },
         onUpdateTask = { task, subs ->
             viewModel.updateTask(task, subs)
@@ -95,7 +95,7 @@ fun NewTaskScreenContent(
     existingTask: Task? = null,
     taskLists: List<TaskList> = emptyList(),
     allSubTasks: List<SubTask> = emptyList(),
-    onAddTask: (String, String, Int, ItemType, Long?, List<SubTask>, Boolean, Int, RecurrenceUnit, String?, Long?, Int?) -> Unit,
+    onAddTask: (String, String, Int, ItemType, Long?, Int, List<SubTask>, Boolean, Int, RecurrenceUnit, String?, Long?, Int?) -> Unit,
     onUpdateTask: (Task, List<SubTask>) -> Unit,
     onDeleteTask: (Task) -> Unit,
     onAddTaskList: (String) -> Unit
@@ -109,6 +109,7 @@ fun NewTaskScreenContent(
     var selectedListId by remember { mutableIntStateOf(if (taskId == -1) -1 else listId) }
     var content by remember { mutableStateOf("") }
     var reminderTime by remember { mutableStateOf<Long?>(null) }
+    var priority by remember { mutableIntStateOf(0) }
 
     // Recurrence logic state variables
     var isRecurring by remember { mutableStateOf(false) }
@@ -151,6 +152,7 @@ fun NewTaskScreenContent(
             selectedType = existingTask.itemType
             selectedListId = existingTask.listId
             reminderTime = existingTask.reminderTime
+            priority = existingTask.priority
             
             isRecurring = existingTask.isRecurring
             recurrenceInterval = existingTask.recurrenceInterval
@@ -311,6 +313,25 @@ fun NewTaskScreenContent(
             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
         )
 
+        if (selectedType == ItemType.TASK) {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text("Priority", style = MaterialTheme.typography.labelLarge)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    listOf("Low" to 0, "Normal" to 1, "High" to 2).forEach { (label, value) ->
+                        FilterChip(
+                            selected = priority == value,
+                            onClick = { priority = value },
+                            label = { Text(label) },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
+            }
+        }
+
         if (selectedType == ItemType.NOTE) {
             OutlinedTextField(
                 value = content,
@@ -436,6 +457,7 @@ fun NewTaskScreenContent(
                                     listId = selectedListId,
                                     itemType = selectedType,
                                     reminderTime = reminderTime,
+                                    priority = priority,
                                     isRecurring = isRecurring,
                                     recurrenceInterval = recurrenceInterval,
                                     recurrenceUnit = recurrenceUnit,
@@ -452,6 +474,7 @@ fun NewTaskScreenContent(
                                 selectedListId,
                                 selectedType,
                                 reminderTime,
+                                priority,
                                 subTasks.toList(),
                                 isRecurring,
                                 recurrenceInterval,
@@ -667,7 +690,7 @@ fun NewTaskScreenPreviewNote() {
                 TaskList(id = 1, name = "Daily"),
                 TaskList(id = 2, name = "Work"),
             ),
-            onAddTask = { _, _, _, _, _, _, _, _, _, _, _, _ -> },
+            onAddTask = { _, _, _, _, _, _, _, _, _, _, _, _, _ -> },
             onUpdateTask = { _, _ -> },
             onDeleteTask = { _ -> },
             onAddTaskList = { _ -> }
@@ -689,7 +712,7 @@ fun NewTaskScreenPreviewTask() {
                 TaskList(id = 1, name = "Daily"),
                 TaskList(id = 2, name = "Work"),
             ),
-            onAddTask = { _, _, _, _, _, _, _, _, _, _, _, _ -> },
+            onAddTask = { _, _, _, _, _, _, _, _, _, _, _, _, _ -> },
             onUpdateTask = { _, _ -> },
             onDeleteTask = { _ -> },
             onAddTaskList = { _ -> }

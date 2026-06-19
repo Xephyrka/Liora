@@ -157,6 +157,17 @@ class NotificationHelper(private val context: Context) {
             notePendingIntent
         ).addRemoteInput(remoteInput).build()
 
+        /** Intent that opens the MainActivity when the notification body is clicked. */
+        val contentIntent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        val contentPendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            contentIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
         /** Builder for the persistent quick-add notification. */
         val builder = NotificationCompat.Builder(context, quickAddChannelId)
             .setSmallIcon(R.mipmap.ic_launcher)
@@ -164,6 +175,7 @@ class NotificationHelper(private val context: Context) {
             .setContentText("Capture a thought before it's gone.")
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setOngoing(true)
+            .setContentIntent(contentPendingIntent)
             .addAction(taskAction)
             .addAction(noteAction)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)

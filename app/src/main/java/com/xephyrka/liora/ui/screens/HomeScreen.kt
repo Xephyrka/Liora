@@ -397,6 +397,10 @@ fun TaskListContent(
                         onSubTaskToggle = { onSubTaskToggle(it) }
                     )
                 }
+
+                item {
+                    Spacer(modifier = Modifier.height(80.dp))
+                }
             }
         }
     }

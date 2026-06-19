@@ -1,5 +1,6 @@
 package com.xephyrka.liora.data.model
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
@@ -50,6 +51,9 @@ data class Task(
     val reminderTime: Long? = null,
     /** Whether the task has been marked as finished. */
     val isCompleted: Boolean = false,
+    /** The importance level of the task (0 = Low, 1 = Normal, 2 = High). */
+    @ColumnInfo(defaultValue = "0")
+    val priority: Int = 0,
     /** Whether this task should repeat on a regular schedule. */
     val isRecurring: Boolean = false,
     /** The frequency multiplier for recurrence (e.g., every '2' weeks). */
